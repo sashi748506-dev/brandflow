@@ -209,6 +209,7 @@ const BrandFlowULTIMATE = () => {
     } else {
       setTextInput(state.text);
     }
+    setAnimationPreview(state.animationPreview || null);
   };
 
   // Draft Management
@@ -278,7 +279,7 @@ const BrandFlowULTIMATE = () => {
       const reader = new FileReader();
       reader.onload = (event) => {
         setLogoPreview(event.target.result);
-        addToHistory({ type: 'logo', preview: event.target.result, file });
+        addToHistory({ type: 'logo', preview: event.target.result, file, animationPreview: null });
       };
       reader.readAsDataURL(file);
     }
@@ -319,7 +320,7 @@ const BrandFlowULTIMATE = () => {
       
       setCreatedAnimations([animationData, ...createdAnimations]);
       setAnimationPreview(animationData);
-      addToHistory({ type: 'logo', preview: logoPreview, file: logoFile });
+      addToHistory({ type: 'logo', preview: logoPreview, file: logoFile, animationPreview: animationData });
       showNotification('Animation generated with sound effect! 🎵', 'success');
     } catch (error) {
       showNotification('Failed to generate animation', 'error');
@@ -357,7 +358,7 @@ const BrandFlowULTIMATE = () => {
       
       setCreatedAnimations([animationData, ...createdAnimations]);
       setAnimationPreview(animationData);
-      addToHistory({ type: 'text', text: textInput });
+      addToHistory({ type: 'text', text: textInput, animationPreview: animationData });
       showNotification('Text animation created with sound! 🎵', 'success');
     } catch (error) {
       showNotification('Failed to create animation', 'error');
